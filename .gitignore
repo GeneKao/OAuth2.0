@@ -1,0 +1,5 @@
+# to ignore generated files
+
+.vagrant/
+*.pyc
+*.db
