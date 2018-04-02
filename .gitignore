@@ -10,3 +10,7 @@
 __pycache__
 *.pyc
 *.db
+
+
+# Ignore the app secret and client secret for application
+*secrets.json
