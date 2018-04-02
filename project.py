@@ -266,9 +266,13 @@ def deleteRestaurant(restaurant_id):
 @app.route('/restaurant/<int:restaurant_id>/menu/')
 def showMenu(restaurant_id):
     restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+    creator = getUserInfo(restaurant.user_id)
     items = session.query(MenuItem).filter_by(
         restaurant_id=restaurant_id).all()
-    return render_template('menu.html', items=items, restaurant=restaurant)
+    if 'username' not in login_session or creator.id != login_session['user_id']:
+        return render_template('publicmenu.html', items=items, restaurant=restaurant, creator=creator)
+    else:
+        return render_template('menu.html', items=items, restaurant=restaurant, creator=creator)
 
 
 # Create a new menu item
